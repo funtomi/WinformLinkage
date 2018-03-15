@@ -14,6 +14,7 @@ namespace WinformLinkage {
         public Form1() {
             InitializeComponent();
             this.StyleManager = this.metroStyleManager1;
+            this.axFramerControl1.Open(System.AppDomain.CurrentDomain.BaseDirectory+"测试PPT.pptx", true, "PowerPoint.Show", "", "");
         }
 
         //显示tooltip

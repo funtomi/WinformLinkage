@@ -24,23 +24,27 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.tbCtrl = new MetroFramework.Controls.MetroTabControl();
             this.tbPgSchematic = new MetroFramework.Controls.MetroTabPage();
             this.tbPgFailureAnalysis = new MetroFramework.Controls.MetroTabPage();
+            this.lbl5 = new MetroFramework.Controls.MetroLabel();
+            this.lbl4 = new MetroFramework.Controls.MetroLabel();
+            this.listBoxPosition = new System.Windows.Forms.ListBox();
+            this.listBoxReason = new System.Windows.Forms.ListBox();
+            this.lbl3 = new MetroFramework.Controls.MetroLabel();
             this.lbl2 = new MetroFramework.Controls.MetroLabel();
             this.lbl1 = new MetroFramework.Controls.MetroLabel();
             this.listBoxPhenomenon = new System.Windows.Forms.ListBox();
             this.listBoxCircuit = new System.Windows.Forms.ListBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lbl3 = new MetroFramework.Controls.MetroLabel();
-            this.listBoxReason = new System.Windows.Forms.ListBox();
-            this.listBoxPosition = new System.Windows.Forms.ListBox();
-            this.lbl4 = new MetroFramework.Controls.MetroLabel();
-            this.lbl5 = new MetroFramework.Controls.MetroLabel();
+            this.axFramerControl1 = new AxDSOFramer.AxFramerControl();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.tbCtrl.SuspendLayout();
+            this.tbPgSchematic.SuspendLayout();
             this.tbPgFailureAnalysis.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // metroStyleManager1
@@ -59,7 +63,7 @@
             this.tbCtrl.ItemSize = new System.Drawing.Size(105, 36);
             this.tbCtrl.Location = new System.Drawing.Point(241, 81);
             this.tbCtrl.Name = "tbCtrl";
-            this.tbCtrl.SelectedIndex = 1;
+            this.tbCtrl.SelectedIndex = 0;
             this.tbCtrl.ShowToolTips = true;
             this.tbCtrl.Size = new System.Drawing.Size(749, 519);
             this.tbCtrl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
@@ -68,6 +72,7 @@
             // 
             // tbPgSchematic
             // 
+            this.tbPgSchematic.Controls.Add(this.axFramerControl1);
             this.tbPgSchematic.HorizontalScrollbarBarColor = true;
             this.tbPgSchematic.HorizontalScrollbarHighlightOnWheel = false;
             this.tbPgSchematic.HorizontalScrollbarSize = 10;
@@ -101,6 +106,55 @@
             this.tbPgFailureAnalysis.VerticalScrollbarBarColor = true;
             this.tbPgFailureAnalysis.VerticalScrollbarHighlightOnWheel = false;
             this.tbPgFailureAnalysis.VerticalScrollbarSize = 10;
+            // 
+            // lbl5
+            // 
+            this.lbl5.AutoSize = true;
+            this.lbl5.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lbl5.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lbl5.Location = new System.Drawing.Point(348, 359);
+            this.lbl5.Name = "lbl5";
+            this.lbl5.Size = new System.Drawing.Size(28, 25);
+            this.lbl5.TabIndex = 9;
+            this.lbl5.Text = "→";
+            // 
+            // lbl4
+            // 
+            this.lbl4.AutoSize = true;
+            this.lbl4.Location = new System.Drawing.Point(378, 10);
+            this.lbl4.Name = "lbl4";
+            this.lbl4.Size = new System.Drawing.Size(79, 19);
+            this.lbl4.TabIndex = 8;
+            this.lbl4.Text = "故障定位：";
+            // 
+            // listBoxPosition
+            // 
+            this.listBoxPosition.FormattingEnabled = true;
+            this.listBoxPosition.ItemHeight = 15;
+            this.listBoxPosition.Location = new System.Drawing.Point(378, 35);
+            this.listBoxPosition.Name = "listBoxPosition";
+            this.listBoxPosition.Size = new System.Drawing.Size(350, 439);
+            this.listBoxPosition.TabIndex = 7;
+            // 
+            // listBoxReason
+            // 
+            this.listBoxReason.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxReason.FormattingEnabled = true;
+            this.listBoxReason.ItemHeight = 15;
+            this.listBoxReason.Location = new System.Drawing.Point(3, 260);
+            this.listBoxReason.Name = "listBoxReason";
+            this.listBoxReason.Size = new System.Drawing.Size(341, 214);
+            this.listBoxReason.TabIndex = 6;
+            // 
+            // lbl3
+            // 
+            this.lbl3.AutoSize = true;
+            this.lbl3.Location = new System.Drawing.Point(3, 235);
+            this.lbl3.Name = "lbl3";
+            this.lbl3.Size = new System.Drawing.Size(79, 19);
+            this.lbl3.TabIndex = 5;
+            this.lbl3.Text = "原因分析：";
             // 
             // lbl2
             // 
@@ -143,54 +197,15 @@
             this.listBoxCircuit.TabIndex = 2;
             this.listBoxCircuit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseMove);
             // 
-            // lbl3
+            // axFramerControl1
             // 
-            this.lbl3.AutoSize = true;
-            this.lbl3.Location = new System.Drawing.Point(3, 235);
-            this.lbl3.Name = "lbl3";
-            this.lbl3.Size = new System.Drawing.Size(79, 19);
-            this.lbl3.TabIndex = 5;
-            this.lbl3.Text = "原因分析：";
-            // 
-            // listBoxReason
-            // 
-            this.listBoxReason.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listBoxReason.FormattingEnabled = true;
-            this.listBoxReason.ItemHeight = 15;
-            this.listBoxReason.Location = new System.Drawing.Point(3, 260);
-            this.listBoxReason.Name = "listBoxReason";
-            this.listBoxReason.Size = new System.Drawing.Size(341, 214);
-            this.listBoxReason.TabIndex = 6;
-            // 
-            // listBoxPosition
-            // 
-            this.listBoxPosition.FormattingEnabled = true;
-            this.listBoxPosition.ItemHeight = 15;
-            this.listBoxPosition.Location = new System.Drawing.Point(378, 35);
-            this.listBoxPosition.Name = "listBoxPosition";
-            this.listBoxPosition.Size = new System.Drawing.Size(350, 439);
-            this.listBoxPosition.TabIndex = 7;
-            // 
-            // lbl4
-            // 
-            this.lbl4.AutoSize = true;
-            this.lbl4.Location = new System.Drawing.Point(378, 10);
-            this.lbl4.Name = "lbl4";
-            this.lbl4.Size = new System.Drawing.Size(79, 19);
-            this.lbl4.TabIndex = 8;
-            this.lbl4.Text = "故障定位：";
-            // 
-            // lbl5
-            // 
-            this.lbl5.AutoSize = true;
-            this.lbl5.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.lbl5.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lbl5.Location = new System.Drawing.Point(348, 359);
-            this.lbl5.Name = "lbl5";
-            this.lbl5.Size = new System.Drawing.Size(28, 25);
-            this.lbl5.TabIndex = 9;
-            this.lbl5.Text = "→";
+            this.axFramerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axFramerControl1.Enabled = true;
+            this.axFramerControl1.Location = new System.Drawing.Point(0, 0);
+            this.axFramerControl1.Name = "axFramerControl1";
+            this.axFramerControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axFramerControl1.OcxState")));
+            this.axFramerControl1.Size = new System.Drawing.Size(741, 475);
+            this.axFramerControl1.TabIndex = 2;
             // 
             // Form1
             // 
@@ -205,8 +220,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.tbCtrl.ResumeLayout(false);
+            this.tbPgSchematic.ResumeLayout(false);
             this.tbPgFailureAnalysis.ResumeLayout(false);
             this.tbPgFailureAnalysis.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -227,6 +244,7 @@
         private System.Windows.Forms.ListBox listBoxPosition;
         private MetroFramework.Controls.MetroLabel lbl4;
         private MetroFramework.Controls.MetroLabel lbl5;
+        private AxDSOFramer.AxFramerControl axFramerControl1;
     }
 }
 
