@@ -40,6 +40,7 @@
             this.listBoxCircuit = new System.Windows.Forms.ListBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.axFramerControl1 = new AxDSOFramer.AxFramerControl();
+            this.lbl6 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.tbCtrl.SuspendLayout();
             this.tbPgSchematic.SuspendLayout();
@@ -51,7 +52,6 @@
             // 
             this.metroStyleManager1.Owner = this;
             this.metroStyleManager1.Style = MetroFramework.MetroColorStyle.Lime;
-            this.metroStyleManager1.Theme = MetroFramework.MetroThemeStyle.Dark;
             // 
             // tbCtrl
             // 
@@ -63,12 +63,13 @@
             this.tbCtrl.ItemSize = new System.Drawing.Size(105, 36);
             this.tbCtrl.Location = new System.Drawing.Point(241, 81);
             this.tbCtrl.Name = "tbCtrl";
-            this.tbCtrl.SelectedIndex = 0;
+            this.tbCtrl.SelectedIndex = 1;
             this.tbCtrl.ShowToolTips = true;
             this.tbCtrl.Size = new System.Drawing.Size(749, 519);
             this.tbCtrl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tbCtrl.TabIndex = 1;
             this.tbCtrl.UseSelectable = true;
+            this.tbCtrl.SelectedIndexChanged += new System.EventHandler(this.tbCtrl_SelectedIndexChanged);
             // 
             // tbPgSchematic
             // 
@@ -81,9 +82,9 @@
             this.tbPgSchematic.Size = new System.Drawing.Size(741, 475);
             this.tbPgSchematic.TabIndex = 0;
             this.tbPgSchematic.Text = "原理图";
-            this.tbPgSchematic.VerticalScrollbarBarColor = true;
+            this.tbPgSchematic.VerticalScrollbarBarColor = false;
             this.tbPgSchematic.VerticalScrollbarHighlightOnWheel = false;
-            this.tbPgSchematic.VerticalScrollbarSize = 10;
+            this.tbPgSchematic.VerticalScrollbarSize = 0;
             // 
             // tbPgFailureAnalysis
             // 
@@ -146,6 +147,7 @@
             this.listBoxReason.Name = "listBoxReason";
             this.listBoxReason.Size = new System.Drawing.Size(341, 214);
             this.listBoxReason.TabIndex = 6;
+            this.listBoxReason.SelectedIndexChanged += new System.EventHandler(this.listBoxReason_SelectedIndexChanged);
             // 
             // lbl3
             // 
@@ -184,6 +186,7 @@
             this.listBoxPhenomenon.Name = "listBoxPhenomenon";
             this.listBoxPhenomenon.Size = new System.Drawing.Size(341, 184);
             this.listBoxPhenomenon.TabIndex = 2;
+            this.listBoxPhenomenon.SelectedIndexChanged += new System.EventHandler(this.listBoxPhenomenon_SelectedIndexChanged);
             // 
             // listBoxCircuit
             // 
@@ -191,15 +194,18 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxCircuit.FormattingEnabled = true;
             this.listBoxCircuit.ItemHeight = 15;
-            this.listBoxCircuit.Location = new System.Drawing.Point(23, 79);
+            this.listBoxCircuit.Location = new System.Drawing.Point(23, 124);
             this.listBoxCircuit.Name = "listBoxCircuit";
-            this.listBoxCircuit.Size = new System.Drawing.Size(199, 514);
+            this.listBoxCircuit.Size = new System.Drawing.Size(199, 469);
             this.listBoxCircuit.TabIndex = 2;
+            this.listBoxCircuit.SelectedIndexChanged += new System.EventHandler(this.listBoxCircuit_SelectedIndexChanged);
             this.listBoxCircuit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseMove);
             // 
             // axFramerControl1
             // 
-            this.axFramerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axFramerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.axFramerControl1.Enabled = true;
             this.axFramerControl1.Location = new System.Drawing.Point(0, 0);
             this.axFramerControl1.Name = "axFramerControl1";
@@ -207,11 +213,21 @@
             this.axFramerControl1.Size = new System.Drawing.Size(741, 475);
             this.axFramerControl1.TabIndex = 2;
             // 
+            // lbl6
+            // 
+            this.lbl6.AutoSize = true;
+            this.lbl6.Location = new System.Drawing.Point(23, 93);
+            this.lbl6.Name = "lbl6";
+            this.lbl6.Size = new System.Drawing.Size(93, 19);
+            this.lbl6.TabIndex = 3;
+            this.lbl6.Text = "请选择回路：";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 614);
+            this.Controls.Add(this.lbl6);
             this.Controls.Add(this.listBoxCircuit);
             this.Controls.Add(this.tbCtrl);
             this.Name = "Form1";
@@ -225,6 +241,7 @@
             this.tbPgFailureAnalysis.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -245,6 +262,7 @@
         private MetroFramework.Controls.MetroLabel lbl4;
         private MetroFramework.Controls.MetroLabel lbl5;
         private AxDSOFramer.AxFramerControl axFramerControl1;
+        private MetroFramework.Controls.MetroLabel lbl6;
     }
 }
 
