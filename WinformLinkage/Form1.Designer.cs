@@ -28,6 +28,7 @@
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.tbCtrl = new MetroFramework.Controls.MetroTabControl();
             this.tbPgSchematic = new MetroFramework.Controls.MetroTabPage();
+            this.axFramerControl1 = new AxDSOFramer.AxFramerControl();
             this.tbPgFailureAnalysis = new MetroFramework.Controls.MetroTabPage();
             this.lbl5 = new MetroFramework.Controls.MetroLabel();
             this.lbl4 = new MetroFramework.Controls.MetroLabel();
@@ -39,13 +40,19 @@
             this.listBoxPhenomenon = new System.Windows.Forms.ListBox();
             this.listBoxCircuit = new System.Windows.Forms.ListBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.axFramerControl1 = new AxDSOFramer.AxFramerControl();
             this.lbl6 = new MetroFramework.Controls.MetroLabel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.tbCtrl.SuspendLayout();
             this.tbPgSchematic.SuspendLayout();
-            this.tbPgFailureAnalysis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).BeginInit();
+            this.tbPgFailureAnalysis.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroStyleManager1
@@ -61,11 +68,11 @@
             this.tbCtrl.Controls.Add(this.tbPgSchematic);
             this.tbCtrl.Controls.Add(this.tbPgFailureAnalysis);
             this.tbCtrl.ItemSize = new System.Drawing.Size(105, 36);
-            this.tbCtrl.Location = new System.Drawing.Point(241, 81);
+            this.tbCtrl.Location = new System.Drawing.Point(241, 87);
             this.tbCtrl.Name = "tbCtrl";
             this.tbCtrl.SelectedIndex = 1;
             this.tbCtrl.ShowToolTips = true;
-            this.tbCtrl.Size = new System.Drawing.Size(749, 519);
+            this.tbCtrl.Size = new System.Drawing.Size(749, 513);
             this.tbCtrl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tbCtrl.TabIndex = 1;
             this.tbCtrl.UseSelectable = true;
@@ -79,12 +86,24 @@
             this.tbPgSchematic.HorizontalScrollbarSize = 10;
             this.tbPgSchematic.Location = new System.Drawing.Point(4, 40);
             this.tbPgSchematic.Name = "tbPgSchematic";
-            this.tbPgSchematic.Size = new System.Drawing.Size(741, 475);
+            this.tbPgSchematic.Size = new System.Drawing.Size(741, 469);
             this.tbPgSchematic.TabIndex = 0;
             this.tbPgSchematic.Text = "原理图";
             this.tbPgSchematic.VerticalScrollbarBarColor = false;
             this.tbPgSchematic.VerticalScrollbarHighlightOnWheel = false;
             this.tbPgSchematic.VerticalScrollbarSize = 0;
+            // 
+            // axFramerControl1
+            // 
+            this.axFramerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.axFramerControl1.Enabled = true;
+            this.axFramerControl1.Location = new System.Drawing.Point(0, 0);
+            this.axFramerControl1.Name = "axFramerControl1";
+            this.axFramerControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axFramerControl1.OcxState")));
+            this.axFramerControl1.Size = new System.Drawing.Size(741, 469);
+            this.axFramerControl1.TabIndex = 2;
             // 
             // tbPgFailureAnalysis
             // 
@@ -101,7 +120,7 @@
             this.tbPgFailureAnalysis.HorizontalScrollbarSize = 10;
             this.tbPgFailureAnalysis.Location = new System.Drawing.Point(4, 40);
             this.tbPgFailureAnalysis.Name = "tbPgFailureAnalysis";
-            this.tbPgFailureAnalysis.Size = new System.Drawing.Size(741, 475);
+            this.tbPgFailureAnalysis.Size = new System.Drawing.Size(741, 469);
             this.tbPgFailureAnalysis.TabIndex = 1;
             this.tbPgFailureAnalysis.Text = "故障分析";
             this.tbPgFailureAnalysis.VerticalScrollbarBarColor = true;
@@ -136,6 +155,8 @@
             this.listBoxPosition.Name = "listBoxPosition";
             this.listBoxPosition.Size = new System.Drawing.Size(350, 439);
             this.listBoxPosition.TabIndex = 7;
+            this.listBoxPosition.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxPosition_MouseDoubleClick);
+            this.listBoxPosition.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseMove);
             // 
             // listBoxReason
             // 
@@ -145,9 +166,11 @@
             this.listBoxReason.ItemHeight = 15;
             this.listBoxReason.Location = new System.Drawing.Point(3, 260);
             this.listBoxReason.Name = "listBoxReason";
-            this.listBoxReason.Size = new System.Drawing.Size(341, 214);
+            this.listBoxReason.Size = new System.Drawing.Size(341, 199);
             this.listBoxReason.TabIndex = 6;
             this.listBoxReason.SelectedIndexChanged += new System.EventHandler(this.listBoxReason_SelectedIndexChanged);
+            this.listBoxReason.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxReason_MouseDoubleClick);
+            this.listBoxReason.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseMove);
             // 
             // lbl3
             // 
@@ -187,6 +210,8 @@
             this.listBoxPhenomenon.Size = new System.Drawing.Size(341, 184);
             this.listBoxPhenomenon.TabIndex = 2;
             this.listBoxPhenomenon.SelectedIndexChanged += new System.EventHandler(this.listBoxPhenomenon_SelectedIndexChanged);
+            this.listBoxPhenomenon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxPhenomenon_MouseDoubleClick);
+            this.listBoxPhenomenon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseMove);
             // 
             // listBoxCircuit
             // 
@@ -199,19 +224,8 @@
             this.listBoxCircuit.Size = new System.Drawing.Size(199, 469);
             this.listBoxCircuit.TabIndex = 2;
             this.listBoxCircuit.SelectedIndexChanged += new System.EventHandler(this.listBoxCircuit_SelectedIndexChanged);
+            this.listBoxCircuit.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxCircuit_MouseDoubleClick);
             this.listBoxCircuit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseMove);
-            // 
-            // axFramerControl1
-            // 
-            this.axFramerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.axFramerControl1.Enabled = true;
-            this.axFramerControl1.Location = new System.Drawing.Point(0, 0);
-            this.axFramerControl1.Name = "axFramerControl1";
-            this.axFramerControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axFramerControl1.OcxState")));
-            this.axFramerControl1.Size = new System.Drawing.Size(741, 475);
-            this.axFramerControl1.TabIndex = 2;
             // 
             // lbl6
             // 
@@ -222,6 +236,57 @@
             this.lbl6.TabIndex = 3;
             this.lbl6.Text = "请选择回路：";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.文件ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(20, 60);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(973, 28);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 文件ToolStripMenuItem
+            // 
+            this.文件ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemOpen,
+            this.MenuItemSave,
+            this.MenuItemSaveAs,
+            this.MenuItemExit});
+            this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
+            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.文件ToolStripMenuItem.Text = "文件";
+            // 
+            // MenuItemOpen
+            // 
+            this.MenuItemOpen.Name = "MenuItemOpen";
+            this.MenuItemOpen.Size = new System.Drawing.Size(129, 26);
+            this.MenuItemOpen.Text = "打开";
+            this.MenuItemOpen.Click += new System.EventHandler(this.MenuItemOpen_Click);
+            // 
+            // MenuItemSave
+            // 
+            this.MenuItemSave.Name = "MenuItemSave";
+            this.MenuItemSave.Size = new System.Drawing.Size(129, 26);
+            this.MenuItemSave.Text = "保存";
+            this.MenuItemSave.Click += new System.EventHandler(this.MenuItemSave_Click);
+            // 
+            // MenuItemSaveAs
+            // 
+            this.MenuItemSaveAs.Name = "MenuItemSaveAs";
+            this.MenuItemSaveAs.Size = new System.Drawing.Size(129, 26);
+            this.MenuItemSaveAs.Text = "另存为";
+            this.MenuItemSaveAs.Click += new System.EventHandler(this.MenuItemSaveAs_Click);
+            // 
+            // MenuItemExit
+            // 
+            this.MenuItemExit.Name = "MenuItemExit";
+            this.MenuItemExit.ShortcutKeyDisplayString = "";
+            this.MenuItemExit.Size = new System.Drawing.Size(129, 26);
+            this.MenuItemExit.Text = "退出";
+            this.MenuItemExit.Click += new System.EventHandler(this.MenuItemExit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -230,6 +295,8 @@
             this.Controls.Add(this.lbl6);
             this.Controls.Add(this.listBoxCircuit);
             this.Controls.Add(this.tbCtrl);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Opacity = 0.9D;
             this.Text = "故障分析系统";
@@ -237,9 +304,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.tbCtrl.ResumeLayout(false);
             this.tbPgSchematic.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).EndInit();
             this.tbPgFailureAnalysis.ResumeLayout(false);
             this.tbPgFailureAnalysis.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axFramerControl1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,6 +332,12 @@
         private MetroFramework.Controls.MetroLabel lbl5;
         private AxDSOFramer.AxFramerControl axFramerControl1;
         private MetroFramework.Controls.MetroLabel lbl6;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 文件ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemSave;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemSaveAs;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemExit;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemOpen;
     }
 }
 
