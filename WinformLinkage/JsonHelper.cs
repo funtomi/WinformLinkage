@@ -25,11 +25,24 @@ namespace WinformLinkage {
                 return json;
             }
             using (FileStream fs = new FileStream(filepath, FileMode.Open, System.IO.FileAccess.Read, FileShare.ReadWrite)) {
-                using (StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("gb2312"))) {
+                using (StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("utf-8"))) {
                     json = sr.ReadToEnd().ToString();
                 }
             }
             return json;
+        }
+
+        public static void SaveFileJson(string filePath, string json) {
+            try {
+                using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write)) {
+                    using (StreamWriter sw = new StreamWriter(fs)) {
+                        sw.WriteLine(json);
+                    }
+                }
+            } catch (Exception) {
+                throw;
+            }
+
         }
 
         /// <summary>

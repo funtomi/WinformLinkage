@@ -15,8 +15,10 @@ using System.Windows.Forms;
 namespace WinformLinkage {
     public partial class Form1 : MetroForm {
         private static string PATH = ConfigurationManager.AppSettings["path"].ToString();
+        private static string FILE_FORMAT = "PowerPoint.Show";
         private Models _model = new Models();
         private string _currentSchema = "";
+        private bool _changeName = false;
         public Form1() {
             InitializeComponent();
             this.StyleManager = this.metroStyleManager1;
@@ -66,14 +68,6 @@ namespace WinformLinkage {
             if (this.axFramerControl1 != null) {
                 this.axFramerControl1.Close();
             }
-        }
-
-        /// <summary>
-        /// 切换第二个页签（故障分析）中的内容
-        /// </summary>
-        /// <param name="circuit"></param>
-        private void ChangeFaluireAnalysis(string circuit) {
-            ChangeFaliurePhenomenon(circuit);
         }
 
         /// <summary>
@@ -168,15 +162,18 @@ namespace WinformLinkage {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void listBoxCircuit_SelectedIndexChanged(object sender, EventArgs e) {
-            var circuit = this.listBoxCircuit.Text;
-            if (string.IsNullOrEmpty(circuit)) {
+                var circuit = this.listBoxCircuit.Text;
+            if (string.IsNullOrEmpty(circuit) || this._currentSchema == circuit) {
                 return;
             }
-            if (this.tbCtrl.SelectedTab == this.tbPgSchematic && this._currentSchema != circuit) {
-                ChangeSchematic(circuit);
+            if (_changeName) {
+                _changeName = false;
+                return;
             }
-            ChangeFaluireAnalysis(circuit);
+            ChangeSchematic(circuit);
+            ChangeFaliurePhenomenon(circuit);
         }
+         
 
         /// <summary>
         /// 切换故障原因事件
@@ -184,6 +181,10 @@ namespace WinformLinkage {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void listBoxReason_SelectedIndexChanged(object sender, EventArgs e) {
+            if (_changeName) {
+                _changeName = false;
+                return;
+            }
             ChangePositions(this.listBoxReason.Text);
         }
 
@@ -194,19 +195,15 @@ namespace WinformLinkage {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void listBoxPhenomenon_SelectedIndexChanged(object sender, EventArgs e) {
+            if (_changeName) {
+                _changeName = false;
+                return;
+            }
             ChangeReasons(this.listBoxPhenomenon.Text);
 
         }
         #endregion
-
-        private void tbCtrl_SelectedIndexChanged(object sender, EventArgs e) {
-            var circuit = this.listBoxCircuit.Text;
-            if (string.IsNullOrEmpty(circuit) || this.tbCtrl.SelectedTab == this.tbPgFailureAnalysis || this._currentSchema == circuit) {
-                return;
-            }
-            ChangeSchematic(circuit);
-        }
-
+         
         private void MenuItemExit_Click(object sender, EventArgs e) {
             Environment.Exit(0);
         }
@@ -223,11 +220,52 @@ namespace WinformLinkage {
         }
 
         private void MenuItemSave_Click(object sender, EventArgs e) {
-
+            if (!_model.HasData) {
+                return;
+            }
+            this.axFramerControl1.Save();
+            this._model.Save();
         }
 
         private void MenuItemSaveAs_Click(object sender, EventArgs e) {
-
+            if (!_model.HasData) {
+                return;
+            }
+            bool changeSchematic = false;
+            try {
+                if (MessageBox.Show("是否更改原理图保存路径？", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                    //另存原理图
+                    using (SaveFileDialog sfd = new SaveFileDialog()) {
+                        var path = this._model.GetSchematicPath(this.listBoxCircuit.Text);
+                        string sExt = System.IO.Path.GetExtension(path);
+                        sfd.Filter = "PPT文件(*.ppt)|*.ppt";
+                        if (sfd.ShowDialog() == DialogResult.OK) {
+                            string sSavePath = sfd.FileName;
+                            if (System.IO.File.Exists(sSavePath)) {
+                                System.IO.File.Delete(sSavePath);
+                            }
+                            this.axFramerControl1.SaveAs(sSavePath, FILE_FORMAT);
+                            this._model.ChangeSchematicPath(this.listBoxCircuit.Text, sSavePath);
+                        }
+                    }
+                    changeSchematic = true;
+                }
+                using (SaveFileDialog sfd = new SaveFileDialog()) {
+                    sfd.Filter = "数据文件(*.json)|*.json";
+                    if (sfd.ShowDialog() == DialogResult.OK) {
+                        string sSavePath = sfd.FileName;
+                        if (System.IO.File.Exists(sSavePath)) {
+                            System.IO.File.Delete(sSavePath);
+                        }
+                        if (!changeSchematic) {
+                            this.axFramerControl1.Save(); 
+                        }
+                        this._model.Save(sSavePath);
+                    }
+                } 
+            } catch (Exception ex) {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -249,22 +287,31 @@ namespace WinformLinkage {
         }
 
         private void RefreshWindow(bool hasData) {
+            ClearWindow();
             if (hasData) {
                 //回路数据绑定
-                listBoxCircuitBingding();
-                if (this.tbCtrl.SelectedTab == this.tbPgSchematic) {
-                    ChangeSchematic(""); 
-                }
+                listBoxCircuitBingding(); 
                 return;
             }
+            
+
+        }
+
+        private void ClearWindow() {
+            this._currentSchema = "";
             this.listBoxCircuit.Items.Clear();
             this.listBoxPhenomenon.Items.Clear();
             this.listBoxReason.Items.Clear();
             this.listBoxPosition.Items.Clear();
             this.CloseOffice();
-
         }
 
+        /// <summary>
+        /// 打开修改窗口获取修改的值
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private string GetChangeText(object sender, MouseEventArgs e) {
             var listBox = sender as ListBox;
             if (listBox == null) {
@@ -277,8 +324,9 @@ namespace WinformLinkage {
                 if (string.IsNullOrEmpty(text)) {
                     return null;
                 }
-                listBox.Items.RemoveAt(index);//先移除当前项的值  
-                listBox.Items.Insert(index, text);//在当前指定项插入新的值
+                listBox.Items[index] = text;
+                //listBox.Items.RemoveAt(index);//先移除当前项的值  
+                //listBox.Items.Insert(index, text);//在当前指定项插入新的值
                 return text;
             }
             return null;
@@ -304,25 +352,50 @@ namespace WinformLinkage {
 
         private void listBoxCircuit_MouseDoubleClick(object sender, MouseEventArgs e) {
             var origin = this.listBoxCircuit.Text;
+            _changeName = true;
             var value = GetChangeText(sender, e);
             if (string.IsNullOrEmpty(value) || origin == value) {
                 return;
             }
             _model.ChangeCircuit(origin, value);
+            this._currentSchema = value;
             
         }
 
         private void listBoxPhenomenon_MouseDoubleClick(object sender, MouseEventArgs e) {
+            var origin = this.listBoxPhenomenon.Text;
+            this.listBoxPhenomenon.SelectedIndexChanged -= listBoxPhenomenon_SelectedIndexChanged;
+            var value = GetChangeText(sender, e);
+            if (string.IsNullOrEmpty(value) || origin == value) {
+                return;
+            }
+            _model.ChangePhenomenon(this.listBoxCircuit.Text,origin, value);
+            this.listBoxPhenomenon.SelectedIndexChanged += listBoxPhenomenon_SelectedIndexChanged;
 
         }
 
         private void listBoxReason_MouseDoubleClick(object sender, MouseEventArgs e) {
+            var origin = this.listBoxReason.Text;
+            this.listBoxReason.SelectedIndexChanged -= listBoxReason_SelectedIndexChanged;
+            var value = GetChangeText(sender, e);
+            if (string.IsNullOrEmpty(value) || origin == value) {
+                return;
+            }
+            _model.ChangeReason(this.listBoxCircuit.Text,this.listBoxPhenomenon.Text, origin, value);
+            this.listBoxReason.SelectedIndexChanged += listBoxReason_SelectedIndexChanged;
 
         }
 
         private void listBoxPosition_MouseDoubleClick(object sender, MouseEventArgs e) {
-
+            var origin = this.listBoxPosition.Text;
+            var value = GetChangeText(sender, e);
+            if (string.IsNullOrEmpty(value) || origin == value) {
+                return;
+            }
+            _model.ChangePosition(this.listBoxCircuit.Text, this.listBoxPhenomenon.Text,this.listBoxReason.Text, origin, value);
         }
+
+      
 
     }
 
