@@ -14,7 +14,7 @@ namespace WinformLinkage {
     /// </summary>
     public class Models {
         private static string PATH = ConfigurationManager.AppSettings["path"].ToString();
-        private static string DEFAULT_FILE = ConfigurationManager.AppSettings["defaltFile"].ToString();
+        private static string DEFAULT_FILE = ConfigurationManager.AppSettings["defaltFile"].ToString(); 
         private List<Circuit> _circuits = new List<Circuit>();
         private string _fileName = "";
         private string _filePath = "";
@@ -237,6 +237,36 @@ namespace WinformLinkage {
             var saveJson = "{\"Rows\":" + json + "}";
             JsonHelper.SaveFileJson(sSavePath, saveJson);
         }
+
+        /// <summary>
+        /// 获取父子回路结构
+        /// </summary>
+        /// <returns></returns>
+        internal Dictionary<string,List<string>> GetCircuitStruct() {
+            if (this._circuits==null||_circuits.Count==0) {
+                return null;
+            }
+            Dictionary<string, List<string>> dic = new Dictionary<string, List<string>>();
+            dic.Add("nullName",new List<string>());
+            foreach (var item in this._circuits) {
+                if (string.IsNullOrEmpty(item.ParentName)) {
+                    if (dic["nullName"].Contains(item.Name)) {
+                        continue;
+                    }
+                    dic["nullName"].Add(item.Name);
+                    continue;
+                }
+                if (dic.Keys.Contains(item.ParentName)) {
+                    if (dic[item.ParentName].Contains(item.Name)) {
+                        continue;
+                    }
+                    dic[item.ParentName].Add(item.Name);
+                    continue;
+                }
+                dic.Add(item.ParentName, new List<string>() { item.Name });
+            }
+            return dic;
+        }
     }
 
     [DataContract]
@@ -250,6 +280,8 @@ namespace WinformLinkage {
         public string Name { get; set; }
         [DataMember]
         public string Schematic { get; set; }
+        [DataMember]
+        public string ParentName { get; set; }
         [DataMember]
         public List<FaliurePhenomenon> FaliurePhenomenon { get; set; } 
     }
