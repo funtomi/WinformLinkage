@@ -65,6 +65,7 @@
             // 
             // lbl4
             // 
+            this.lbl4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl4.AutoSize = true;
             this.lbl4.Location = new System.Drawing.Point(724, 430);
             this.lbl4.Name = "lbl4";
@@ -74,6 +75,8 @@
             // 
             // listBoxPosition
             // 
+            this.listBoxPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxPosition.FormattingEnabled = true;
             this.listBoxPosition.ItemHeight = 15;
             this.listBoxPosition.Location = new System.Drawing.Point(724, 452);
@@ -85,6 +88,7 @@
             // 
             // listBoxReason
             // 
+            this.listBoxReason.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxReason.FormattingEnabled = true;
             this.listBoxReason.ItemHeight = 15;
             this.listBoxReason.Location = new System.Drawing.Point(724, 288);
@@ -97,6 +101,7 @@
             // 
             // lbl3
             // 
+            this.lbl3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl3.AutoSize = true;
             this.lbl3.Location = new System.Drawing.Point(724, 264);
             this.lbl3.Name = "lbl3";
@@ -106,6 +111,7 @@
             // 
             // lbl1
             // 
+            this.lbl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl1.AutoSize = true;
             this.lbl1.Location = new System.Drawing.Point(724, 93);
             this.lbl1.Name = "lbl1";
@@ -115,6 +121,7 @@
             // 
             // listBoxPhenomenon
             // 
+            this.listBoxPhenomenon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxPhenomenon.FormattingEnabled = true;
             this.listBoxPhenomenon.ItemHeight = 15;
             this.listBoxPhenomenon.Location = new System.Drawing.Point(724, 122);
@@ -150,21 +157,21 @@
             // MenuItemOpen
             // 
             this.MenuItemOpen.Name = "MenuItemOpen";
-            this.MenuItemOpen.Size = new System.Drawing.Size(180, 26);
+            this.MenuItemOpen.Size = new System.Drawing.Size(129, 26);
             this.MenuItemOpen.Text = "打开";
             this.MenuItemOpen.Click += new System.EventHandler(this.MenuItemOpen_Click);
             // 
             // MenuItemSave
             // 
             this.MenuItemSave.Name = "MenuItemSave";
-            this.MenuItemSave.Size = new System.Drawing.Size(180, 26);
+            this.MenuItemSave.Size = new System.Drawing.Size(129, 26);
             this.MenuItemSave.Text = "保存";
             this.MenuItemSave.Click += new System.EventHandler(this.MenuItemSave_Click);
             // 
             // MenuItemSaveAs
             // 
             this.MenuItemSaveAs.Name = "MenuItemSaveAs";
-            this.MenuItemSaveAs.Size = new System.Drawing.Size(180, 26);
+            this.MenuItemSaveAs.Size = new System.Drawing.Size(129, 26);
             this.MenuItemSaveAs.Text = "另存为";
             this.MenuItemSaveAs.Click += new System.EventHandler(this.MenuItemSaveAs_Click);
             // 
@@ -172,7 +179,7 @@
             // 
             this.MenuItemExit.Name = "MenuItemExit";
             this.MenuItemExit.ShortcutKeyDisplayString = "";
-            this.MenuItemExit.Size = new System.Drawing.Size(180, 26);
+            this.MenuItemExit.Size = new System.Drawing.Size(129, 26);
             this.MenuItemExit.Text = "退出";
             this.MenuItemExit.Click += new System.EventHandler(this.MenuItemExit_Click);
             // 
